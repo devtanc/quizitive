@@ -1,0 +1,6 @@
+#!/bin/sh
+echo Starting toDoList server
+sleep 1
+datetime=$(date +%Y%m%d-%H.%M)
+nohup node quiz-server.js > quiz-server-logs_$datetime.log &
+echo Errors: $?
