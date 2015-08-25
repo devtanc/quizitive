@@ -1,0 +1,152 @@
+#wrapper {
+    max-width: 750px;
+    min-width: 348px;
+    height:100vh;
+    margin: 0 auto;
+    padding-top: 80px;
+    background-color: #D6D6D6;
+}
+
+.shadowed {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+#floatingHeader {
+    background-color: #2196F3;
+    color: white;
+    position:fixed;
+    top: 0;
+    max-width: 742px;
+    width:100%;
+    min-width: 348px;
+    margin: 0 auto;
+    z-index: 10;
+    padding: 4px 4px;
+}
+
+#menuHamburger {
+    float:left;
+    margin-left: 4px;
+    padding: 6px 0px;
+}
+
+#results {
+    float: right;
+    padding: 10px 0px;
+    margin-right:12px;
+}
+
+div#questionDots {
+    padding-left: 4px;
+    position:fixed;
+    top:40px;
+}
+
+div#questionDot {
+    background-color: #BBDEFB;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0px 4px;
+    width: 20px;
+    height: 20px;
+
+    position:relative;
+    top:0px;
+    transition: top 0.2s ease-in;
+    z-index: 5;
+}
+
+div#questionDot.selected {
+    background-color: #FFEB3B;
+    top:8px;
+    transition: top 0.2s ease-out;
+}
+
+#question {
+    margin: 8px;
+    font-size: 20px;
+}
+
+#question.readOnly {
+    color:darkgray;
+}
+
+#questionText {
+    padding: 10px;
+    background-color: #BBDEFB;
+}
+
+.answer {
+    padding: 15px 10px;
+    border-top:solid #F0F0F0 1px;
+
+    transition: all 0.1s ease-in;
+}
+
+.answer.selected {
+    background-color: #FFEB3B;
+    box-shadow: #555 1px 1px 6px;
+    border-radius: 3px;
+
+    transition: all 0.1s ease-out;
+}
+
+.answer.selected.correct {
+    background-color: #B2FF59;
+}
+
+.answer.selected.incorrect {
+    background-color: red;
+}
+
+#answerText {
+    padding: 5px;
+}
+
+#submitButton {
+    width: 120px;
+    height: 40px;
+    background-color: #B2FF59;
+
+    font-size: 22px;
+    text-align: center;
+    line-height:40px;
+
+    position: fixed;
+    z-index: 10;
+    bottom: 8px;
+    right: 8px;
+}
+
+#submitButton:active {
+    box-shadow: none;
+}
+
+#addQuestionButton {
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #B2FF59;
+
+    position: fixed;
+    z-index: 10;
+    bottom: 8px;
+    right: 8px;
+}
+
+#addQuestionButton:active {
+    box-shadow: none;
+}
+
+#questionInfo {
+    background-color: #BBDEFB;
+    color: white;
+    font-weight: 100;
+    font-size:14px;
+    padding: 4px;
+}

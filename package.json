@@ -1,25 +1,14 @@
 {
   "name": "Quizitive",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An app to allow greater communication in the classroom, and more precise evaluation of learning in real time.",
-  "main": "quiz-server.js",
-  "repository": {
-    "type": "git",
-    "url": "https://devtanc@github.com/devtanc/quizitive.git"
-  },
-  "scripts": {
-    "start": "node quiz-server.js"
-  },
-  "author": "",
-  "bugs": {
-    "url": "https://github.com/devtanc/quizitive/issues"
-  },
-  "homepage": "https://github.com/devtanc/quizitive",
   "dependencies": {
-    "angular-touch": "^1.4.3",
-    "express": "^4.13.3",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.2",
     "express-jwt": "^3.0.1",
-    "ng-dialog": "^0.4.0",
+    "passport": "^0.3.0",
+    "passport-auth0": "^0.3.0",
     "socket.io": "^1.3.6"
-  }
+  },
+    "main":"quizitive-server.js"
 }

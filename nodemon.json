@@ -1,0 +1,6 @@
+{
+    "verbose": true,
+    "ignore": ["node_modules", "README.md"],
+    "watch": ["quizitive.js", "quizitive/app.js", "package.json"],
+    "start": "quizitive-server.js"
+}

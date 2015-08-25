@@ -1,0 +1,12 @@
+<div class="center card tall centered-content">
+  <div class="login-info">
+    <div class="title">Select a Room</div>
+    <div class="section">
+      <input id="roomNameInput" class="styled-input" type="text" placeholder="Custom room..." ng-pattern="/^[a-zA-Z0-9-_]+$/" ng-model="roomName" />
+      <button class="blue-button" type="button" name="Go" ng-click="goToRoom(roomName)">--> Go to Custom Room</button>
+    </div>
+    <div class="section">
+      <button class="blue-button" type="button" name="button" ng-click="goToRoom(generatedRoom)">Go to generated room: {{generatedRoom}}</button>
+    </div>
+  </div>
+</div>

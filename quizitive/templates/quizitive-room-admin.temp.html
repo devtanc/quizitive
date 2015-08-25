@@ -1,0 +1,38 @@
+<div id="wrapper" ng-swipe-left="selectNextQuestion()" ng-swipe-right="selectPrevQuestion()">
+    <div id="floatingHeader" class="shadowed">
+        <div id="menuHamburger" class="pointer" ng-click="">
+            <svg width="25" height="20">
+                <g fill="none" stroke="white" stroke-width="4">
+                    <path stroke-linecap="round" d="M2 2 l21 0" />
+                    <path stroke-linecap="round" d="M2 10 l21 0" />
+                    <path stroke-linecap="round" d="M2 18 l21 0" />
+                </g>
+            </svg>
+        </div>
+
+        <div id="results" class="pointer" ng-click="sendQuestion()">Send Question</div>
+    </div>
+    <div id="questionDots">
+        <div id="questionDot" class="shadowed pointer" ng-class="{'selected' : currentQuestion == $index}" ng-click="selectQuestion($index)" ng-repeat="questions in questionList"></div>
+    </div>
+
+
+    <div id="question" class="card shadowed" ng-class="{'readOnly' : receivedQuestions[currentQuestion].readOnly}">
+        <div id="questionInfo"><span>Question ID: [{{questionList[currentQuestion].questionID}}]</span></div>
+        <div id="questionText">{{questionList[currentQuestion].questionText}}</div>
+        <div id="answerList">
+            <div class="answer pointer" ng-class="{'selected' : currentAnswer == $index}" ng-click="selectAnswer($index)" ng-repeat="answer in questionList[currentQuestion].answers">
+                <div id="answerText">{{answer.answerText}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addQuestionButton" class="card pointer" ng-click="createQuestion()">
+        <svg height="50" width="50">
+            <g fill="none" stroke="white" stroke-width="2">
+              <path stroke-linecap="square" d="M25 18 l0 14"></path>
+              <path stroke-linecap="square" d="M18 25 l14 0"></path>
+            </g>
+          </svg>
+    </div>
+</div>

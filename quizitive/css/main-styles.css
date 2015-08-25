@@ -1,0 +1,30 @@
+body {
+  background-color: #F0F0F0;
+  font-family: 'Roboto Condensed', sans-serif;
+  line-height: 1;
+  margin: 0px;
+}
+
+.center {
+    width: 85vw;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.card {
+  background: #FFF;
+  box-shadow: #555 1px 1px 6px;
+  border-radius: 3px;
+}
+
+.tall {
+  height: 85vh;
+}
+
+.centered-content {
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
