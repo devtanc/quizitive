@@ -2,7 +2,7 @@ var loginControllers = angular.module('quizitive');
 
 loginControllers.controller('loginController', function ($route, $scope, $http, store, $location) {
     $scope.login = function () {
-        window.location = 'http://in.quizitive.net:8080/auth0-login';
+        window.location = 'http://ec2-54-201-246-23.us-west-2.compute.amazonaws.com:8080/auth0-login';
     };
 });
 
