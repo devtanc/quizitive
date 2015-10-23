@@ -20,81 +20,81 @@ var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
 
 var questionDB = [
     {
-            questionID:'000-000-000-001',
-            questionText: 'This is a question with a bunch of words in it to simulate a question that also has many words in it. How wonderful is that?',
-            answers: [
-                {
-                    answerText: 'Answer 1',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 2',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 3',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 4',
-                    selected: false
-                }
-            ],
-            correctAnswer: '0',
-            readOnly: true,
-            answeredUsers:[]
-        },
-        {
-            questionID:'000-000-000-002',
-            questionText: 'This is a ANOTHER question with a bunch of words in it to simulate ANOTHER question that also has many words in it. How wonderful is that?',
-            answers: [
-                {
-                    answerText: 'Answer 1',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 2',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 3',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 4',
-                    selected: false
-                }
-            ],
-            correctAnswer: '1',
-            readOnly: true,
-            answeredUsers:[]
-        },
-        {
-            questionID:'000-000-000-003',
-            questionText: 'This is a YET ANOTHER question with a bunch of words in it to simulate YET ANOTHER question that also has many words in it. How wonderful is that?',
-            answers: [
-                {
-                    answerText: 'Answer 1',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 2',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 3',
-                    selected: false
-                },
-                {
-                    answerText: 'Answer 4',
-                    selected: false
-                }
-            ],
-            correctAnswer: '2',
-            readOnly: true,
-            answeredUsers:[]
-        }
-    ];
+        questionID:"000-000-000-001",
+        questionText: "This is a question with a bunch of words in it to simulate a question that also has many words in it. How wonderful is that?",
+        answers: [
+            {
+                answerText: "Answer 1",
+                selected: false
+            },
+            {
+                answerText: "Answer 2",
+                selected: false
+            },
+            {
+                answerText: "Answer 3",
+                selected: false
+            },
+            {
+                answerText: "Answer 4",
+                selected: false
+            }
+        ],
+        correctAnswer: "0",
+        readOnly: true,
+        answeredUsers:[]
+    },
+    {
+        questionID:"000-000-000-002",
+        questionText: "This is a ANOTHER question with a bunch of words in it to simulate ANOTHER question that also has many words in it. How wonderful is that?",
+        answers: [
+            {
+                answerText: "Answer 1",
+                selected: false
+            },
+            {
+                answerText: "Answer 2",
+                selected: false
+            },
+            {
+                answerText: "Answer 3",
+                selected: false
+            },
+            {
+                answerText: "Answer 4",
+                selected: false
+            }
+        ],
+        correctAnswer: "1",
+        readOnly: true,
+        answeredUsers:[]
+    },
+    {
+        questionID:"000-000-000-003",
+        questionText: "This is a YET ANOTHER question with a bunch of words in it to simulate YET ANOTHER question that also has many words in it. How wonderful is that?",
+        answers: [
+            {
+                answerText: "Answer 1",
+                selected: false
+            },
+            {
+                answerText: "Answer 2",
+                selected: false
+            },
+            {
+                answerText: "Answer 3",
+                selected: false
+            },
+            {
+                answerText: "Answer 4",
+                selected: false
+            }
+        ],
+        correctAnswer: "2",
+        readOnly: true,
+        answeredUsers:[]
+    }
+];
 
 app.use(passport.initialize());
 
@@ -136,7 +136,7 @@ app.get('/auth0-login-callback', passport.authenticate('auth0', { failureRedirec
         algorithm: TOKEN_ALG
     };
     var token = jwt.sign(claim, LOCAL_PRIVATE_KEY, options);
-    res.redirect("/#/room-sel/" + token);
+    res.redirect("/#/token/" + token);
   }
 );
 

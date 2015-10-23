@@ -1,13 +1,12 @@
 var loginControllers = angular.module('quizitive');
 
-loginControllers.controller('loginController', function ($route, $scope, $http, store, $location) {
+loginControllers.controller('loginController', function ($scope) {
     $scope.login = function () {
-        window.location = 'http://ec2-54-201-246-23.us-west-2.compute.amazonaws.com:8080/auth0-login';
+        window.location = 'http://' + window.location.hostname + ':8080/auth0-login';
     };
 });
 
-loginControllers.controller('roomSelController', function ($route, $scope, store, $location, jwtHelper, $routeParams) {
-    store.set('auth-token', $routeParams.token);
+loginControllers.controller('roomSelController', function ($scope, store, socket, $location, jwtHelper) {
     console.log(store.get('auth-token'));
     $scope.roomName = '';
     $scope.generatedRoom = '';
@@ -27,17 +26,17 @@ loginControllers.controller('roomSelController', function ($route, $scope, store
             pathBegin = '/chat-room/';
         }
         if (roomName) {
-            $location.path(pathBegin + roomName.toLowerCase());
             socket.emit('joinRoom', {
                 token: store.get('auth-token'),
                 room:roomName.toLowerCase()
             });
+            $location.path(pathBegin + roomName.toLowerCase());
         } else {
-            $location.path(pathBegin + $scope.generatedRoom.toLowerCase());
             socket.emit('joinRoom', {
                 token: store.get('auth-token'),
                 room:$scope.generatedRoom.toLowerCase()
             });
+            $location.path(pathBegin + $scope.generatedRoom.toLowerCase());
         }
     };
 

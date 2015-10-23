@@ -18,10 +18,15 @@ var app = angular.module('quizitive', ['angular-storage', 'angular-jwt', 'ngRout
             css: 'css/quizitive-room.css'
         });
 
-        $routeProvider.when('/room-sel/:token', {
+        $routeProvider.when('/room-sel', {
             templateUrl: '/templates/room-sel.temp.html',
             controller: 'roomSelController',
             css: 'css/login-styles.css'
+        });
+
+        $routeProvider.when('/token/:token', {
+            templateUrl: '/templates/blank.temp.html',
+            controller: 'tokenController'
         });
 
         $locationProvider.html5Mode(true);
