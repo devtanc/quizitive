@@ -1,56 +1,56 @@
 .body {
-    padding-top:25px;
+		padding-top:25px;
 }
 
 .login-info {
-  padding:25px;
+	padding:25px;
 }
 
 .title {
-  color: #A7A8A9;
-  font: 32px "Open Sans", sans-serif;
-  margin-bottom: 20px;
+	color: #A7A8A9;
+	font: 32px "Open Sans", sans-serif;
+	margin-bottom: 20px;
 }
 
 #logo img {
-    margin-bottom: 25px;
+		margin-bottom: 50px;
 }
 
 .blue-button {
-  color: #FFF;
-  font: 12px "Open Sans", sans-serif;
-  background-color: #0091EA;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 14px;
-  box-shadow: #01579B 1px 1px 3px;
+	color: #FFF;
+	font: 12px "Open Sans", sans-serif;
+	background-color: #0091EA;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 14px;
+	box-shadow: #01579B 1px 1px 3px;
 }
 
 .blue-button:hover {
-  cursor: pointer;
-  box-shadow:
-    inset #FFFFFF 1px 1px 3px,
-    #01579B 1px 1px 3px;
+	cursor: pointer;
+	box-shadow:
+		inset #FFFFFF 1px 1px 3px,
+		#01579B 1px 1px 3px;
 }
 
 .styled-input {
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-  box-shadow: #BBB 0px 0px 5px;
-  margin: 0px 14px;
-  color: #A7A8A9;
-  font: 12px "Open Sans", sans-serif;
+	padding: 8px 16px;
+	border-radius: 4px;
+	border: none;
+	box-shadow: #BBB 0px 0px 5px;
+	margin: 0px 14px;
+	color: #A7A8A9;
+	font: 12px "Open Sans", sans-serif;
 }
 
 .section {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .ng-invalid-pattern {
-  background-color: pink;
+	background-color: pink;
 }
 
 #token {
-    width:200px;
+		width:200px;
 }
