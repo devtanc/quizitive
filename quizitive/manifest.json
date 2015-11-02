@@ -7,6 +7,6 @@
 			"type": "image/png"
 		}
 	],
-	"start_url": "http://christensenhome.myds.me:8080",
+	"start_url": "http://christensenhome.myds.me:40569/",
 	"display": "standalone"
 }
