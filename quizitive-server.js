@@ -16,7 +16,7 @@ var LOCAL_PUBLIC_KEY = process.env.LOCAL_PUBLIC_KEY || fs.readFileSync('./keyfil
 var AUTH0_PUBLIC_KEY = process.env.AUTH0_PUBLIC_KEY || fs.readFileSync('./keyfiles/wdd-public-key.pem');
 var TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || 7200; //sec
 var SOCKET_AUTH_TIMEOUT = process.env.SOCKET_AUTH_TIMEOUT || 500; //ms
-var PORT_NUMBER = process.env.PORT || 8080;
+var PORT_NUMBER = process.env.PORT || 40563;
 var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'testServer';
 var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
 
@@ -97,6 +97,7 @@ var questionDB = [
 				answeredUsers:[]
 		}
 ];
+var adminSocket = null;
 
 app.use(passport.initialize());
 
@@ -149,6 +150,7 @@ app.post('/sms', urlEncodedParser, function(req, res) {
 	switch(req.body.Body) {
 		case 'A':
 		case 'a':
+			adminSocket.emit('textUpdate', { message: 'Correct answer from '})
 			res.send('Correct!');
 			break;
 		default:
@@ -201,6 +203,7 @@ io.sockets.on('connection', function (socket) {
 										if (payload.role === 'admin') {
 												socket.isAdmin = true;
 												console.log('New admin connected');
+												adminSocket = socket; //Store in parent scope to access on any connection
 										} else {
 												console.log('New user connected');
 										}
