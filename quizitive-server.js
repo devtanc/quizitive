@@ -3,9 +3,10 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
-var jsonParser = bodyParser.json();
 var passport = require('./js-modules/passport-init');
 var forceLogin = require('./js-modules/force-login');
 var twilio = require('./js-modules/twilio.js');
@@ -141,9 +142,16 @@ app.get('/auth0-login-callback', passport.authenticate('auth0', { failureRedirec
 	}
 );
 
-app.post('/sms', function(req, res) {
+app.post('/sms', urlEncodedParser, function(req, res) {
 	//Endpoint to handle sms responses through twilio
 	console.log('SMS Endpoint Accessed');
+	console.log(JSON.stringify(req.body));
+});
+
+app.post('/sms-status', function(req, res) {
+	//Endpoint to handle sms responses through twilio
+	console.log('SMS Status Endpoint Accessed');
+	console.log(JSON.stringify(req));
 });
 
 var hasAnswered = function(users, user) {
