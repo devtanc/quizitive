@@ -145,7 +145,15 @@ app.get('/auth0-login-callback', passport.authenticate('auth0', { failureRedirec
 app.post('/sms', urlEncodedParser, function(req, res) {
 	//Endpoint to handle sms responses through twilio
 	console.log('SMS Endpoint Accessed');
-	console.log(JSON.stringify(req.body));
+	switch(req.body.Body) {
+		case 'A':
+		case 'a':
+			res.send('Correct!');
+			break;
+		default:
+			res.send('Incorrect!');
+			break;
+	}
 });
 
 app.post('/sms-status', function(req, res) {
