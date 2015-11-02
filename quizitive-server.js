@@ -141,6 +141,10 @@ app.get('/auth0-login-callback', passport.authenticate('auth0', { failureRedirec
 	}
 );
 
+app.get('/sms', function(req, res) {
+	//Endpoint to handle sms responses through twilio
+});
+
 var hasAnswered = function(users, user) {
 		for (var i = 0; i < users.length; i++) {
 				if (users[i].userID === user) { return true; }
@@ -278,12 +282,12 @@ io.sockets.on('connection', function (socket) {
 					socket.emit('err', { message:'You are not authorized to perform this function.' });
 					return;
 			}
-			twilio.messages.create({
-					to: "+1" + data.to,
-					from: "+18582957849",
-					body: data.body,
-				}, function(err, message) {
-					console.log(message.sid);
-			});
+//			twilio.messages.create({
+//					to: "+1" + data.to,
+//					from: "+18582957849",
+//					body: data.body,
+//				}, function(err, message) {
+//					console.log(message.sid);
+//			});
 		});
 });
