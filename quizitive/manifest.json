@@ -1,0 +1,12 @@
+{
+	"name": "Quizitive",
+	"icons": [
+		{
+			"src": "resources/QuizitiveLogo.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		}
+	],
+	"start_url": "http://10.0.0.13:8080",
+	"display": "standalone"
+}
