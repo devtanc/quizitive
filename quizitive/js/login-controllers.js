@@ -7,7 +7,7 @@ loginControllers.controller('loginController', function ($scope, store, $locatio
 					//If a valid token is found, redirect to room selection page
 					$location.path('/room-sel');
 				} else {
-					window.location = 'http://in.quizitive.net/auth0-login';
+					window.location = 'http://' + window.location.hostname + '/auth0-login';
 				}
 		};
 });
