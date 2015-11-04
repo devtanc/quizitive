@@ -2,5 +2,5 @@
 echo Starting Quizitive server
 sleep 1
 datetime=$(date +%Y%m%d-%H.%M)
-nohup nodejs quizitive-server.js > server-logs_$datetime.log &
+nohup node quizitive-server.js > server-logs_$datetime.log &
 echo Errors: $?
