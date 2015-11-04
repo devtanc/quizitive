@@ -3,7 +3,6 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
@@ -11,13 +10,16 @@ var passport = require('./js-modules/passport-init');
 var forceLogin = require('./js-modules/force-login');
 var twilio = require('./js-modules/twilio.js');
 
-var LOCAL_PRIVATE_KEY = process.env.LOCAL_PRIVATE_KEY || fs.readFileSync('./keyfiles/local-private-key.key');
-var LOCAL_PUBLIC_KEY = process.env.LOCAL_PUBLIC_KEY || fs.readFileSync('./keyfiles/local-public-key.pem');
-var AUTH0_PUBLIC_KEY = process.env.AUTH0_PUBLIC_KEY || fs.readFileSync('./keyfiles/wdd-public-key.pem');
+//GLOBALS
+//Keyfiles
+var LOCAL_PRIVATE_KEY = fs.readFileSync('./keyfiles/local-private-key.key');
+var LOCAL_PUBLIC_KEY = fs.readFileSync('./keyfiles/local-public-key.pem');
+//var AUTH0_PUBLIC_KEY = fs.readFileSync('./keyfiles/wdd-public-key.pem');
+//Others
 var TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || 7200; //sec
 var SOCKET_AUTH_TIMEOUT = process.env.SOCKET_AUTH_TIMEOUT || 500; //ms
 var PORT_NUMBER = process.env.PORT || 40569;
-var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'testServer';
+var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'Quizitive';
 var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
 
 var questionDB = [

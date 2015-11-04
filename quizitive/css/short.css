@@ -1,0 +1,12 @@
+@media all and (max-height: 400px) {
+	#splashCard {
+		margin-top: 40px !important;
+		min-height: 245px !important;
+	}
+
+	.tall {
+		min-height: 308px !important;
+	}
+
+
+}
