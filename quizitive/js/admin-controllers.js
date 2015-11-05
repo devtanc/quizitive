@@ -75,15 +75,20 @@ adminControllers.controller('quizitiveRoomAdminController', function ($route, $l
 		//SOCKET STUFF
 		$scope.sendQuestion = function () {
 				if (newQuestion) {
-						socket.emit('sendQuestion', {
-								question: $scope.questionList[$scope.questionList.length - 1],
-								room: $scope.room,
-								token: store.get('auth-token')
-						});
-						newQuestion = false;
+					var questionToSend = $scope.questionList[$scope.questionList.length - 1]
+					socket.emit('sendQuestion', {
+							question: questionToSend,
+							room: $scope.room,
+							token: store.get('auth-token')
+					});
+					newQuestion = false;
+					var smsBody = questionToSend.questionText
+					for (var i = 0; i < questionToSend.answers.length; i++) {
+						smsBody += "\n" + (i + 1) + ": " + questionToSend.answers[i].answerText;
+					}
 					socket.emit('SMS', {
-						to: '8018396253',
-						body: '[Test] A new question has been sent'
+						to: '4805860539',
+						body: smsBody
 					});
 				}
 		};

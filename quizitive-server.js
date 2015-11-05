@@ -137,7 +137,7 @@ app.get('/auth0-login-callback', passport.authenticate('auth0', { failureRedirec
 		};
 		var options = {
 				issuer: TOKEN_ISSUED_BY,
-				expiresInSeconds: TOKEN_EXPIRATION,
+				expiresIn: TOKEN_EXPIRATION,
 				algorithm: TOKEN_ALG
 		};
 		var token = jwt.sign(claim, LOCAL_PRIVATE_KEY, options);
@@ -305,12 +305,13 @@ io.sockets.on('connection', function (socket) {
 					socket.emit('err', { message:'You are not authorized to perform this function.' });
 					return;
 			}
-//			twilio.messages.create({
-//					to: "+1" + data.to,
-//					from: "+18582957849",
-//					body: data.body,
-//				}, function(err, message) {
-//					console.log(message.sid);
-//			});
+			console.log(JSON.stringify(data));
+			twilio.messages.create({
+					to: "+1" + data.to,
+					from: "+18582957849",
+					body: data.body,
+				}, function(err, message) {
+					console.log(message.sid);
+			});
 		});
 });
