@@ -6,14 +6,15 @@ var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
+var path = require('path');
 var passport = require('./js-modules/passport-init');
 var forceLogin = require('./js-modules/force-login');
 var twilio = require('./js-modules/twilio.js');
 
 //GLOBALS
 //Keyfiles
-var LOCAL_PRIVATE_KEY = fs.readFileSync('./keyfiles/local-private-key.key');
-var LOCAL_PUBLIC_KEY = fs.readFileSync('./keyfiles/local-public-key.pem');
+var LOCAL_PRIVATE_KEY = fs.readFileSync(__dirname + 'keyfiles/local-private-key.key');
+var LOCAL_PUBLIC_KEY = fs.readFileSync(__dirname + 'keyfiles/local-public-key.pem');
 //var AUTH0_PUBLIC_KEY = fs.readFileSync('./keyfiles/wdd-public-key.pem');
 //Others
 var TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || 7200; //sec
