@@ -1,3 +1,5 @@
+/* global angular */
+
 var adminControllers = angular.module('quizitive');
 
 adminControllers.controller('quizitiveRoomAdminController', function ($route, $location, $scope, socket, store, $routeParams) {
@@ -75,14 +77,14 @@ adminControllers.controller('quizitiveRoomAdminController', function ($route, $l
 		//SOCKET STUFF
 		$scope.sendQuestion = function () {
 				if (newQuestion) {
-					var questionToSend = $scope.questionList[$scope.questionList.length - 1]
+					var questionToSend = $scope.questionList[$scope.questionList.length - 1];
 					socket.emit('sendQuestion', {
 							question: questionToSend,
 							room: $scope.room,
 							token: store.get('auth-token')
 					});
 					newQuestion = false;
-					var smsBody = questionToSend.questionText
+					var smsBody = questionToSend.questionText;
 					for (var i = 0; i < questionToSend.answers.length; i++) {
 						smsBody += "\n" + (i + 1) + ": " + questionToSend.answers[i].answerText;
 					}

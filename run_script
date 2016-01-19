@@ -1,6 +1,0 @@
-#!/bin/sh
-echo Starting Quizitive server
-sleep 1
-datetime=$(date +%Y%m%d-%H.%M)
-nohup node quizitive-server.js > server-logs_$datetime.log &
-echo Errors: $?

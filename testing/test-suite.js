@@ -1,12 +1,15 @@
+/* global describe, element, by, browser, beforeEach, it, protractor, expect */
+
 describe('quizitive app tests', function() {
-	var hostUrl = 'http://in.quizitive.net';
+	var HOST_URL = 'http://192.168.1.50:40569';
+	var TIMEOUT = 3500;
 
 	describe('quizitive user login and room login', function() {
 		var loggedIn = false;
 		var loginSkipTestComplete = false;
 
 		beforeEach(function() {
-			browser.get(hostUrl);
+			browser.get(HOST_URL);
 			if (loggedIn && loginSkipTestComplete) {
 				element(by.css('.blue-button')).click();
 				return;
@@ -15,25 +18,25 @@ describe('quizitive app tests', function() {
 
 		it('logs in a test user to the room selection page', function() { //This will initialize
 			element(by.css('.blue-button')).click().then(function() {
-				return browser.wait(protractor.until.elementLocated(by.tagName('form')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.tagName('form')), TIMEOUT);
 			}).then(function() {
 				var form = browser.driver.findElement(by.tagName('form'));
 				browser.driver.findElement(by.id('a0-signin_easy_email')).sendKeys('test1@quizitive.net');
 				browser.driver.findElement(by.id('a0-signin_easy_password')).sendKeys('testtest');
 				form.submit();
-				return browser.wait(protractor.until.elementLocated(by.css('.blue-button')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.css('.blue-button')), TIMEOUT);
 			}).then(function() {
 				loggedIn = true;
-				expect(browser.getCurrentUrl()).toEqual(hostUrl + '/room-sel');
+				expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/room-sel');
 			});
 		});
 
 		it('skips login if token already exists', function() {
 			element(by.css('.blue-button')).click().then(function() {
-				return browser.wait(protractor.until.elementLocated(by.css('.blue-button')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.css('.blue-button')), TIMEOUT);
 			}).then(function() {
 				loginSkipTestComplete = true;
-				expect(browser.getCurrentUrl()).toEqual(hostUrl + '/room-sel');
+				expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/room-sel');
 			});
 
 		});
@@ -41,9 +44,9 @@ describe('quizitive app tests', function() {
 		it('navigates to custom room', function() {
 			element(by.id('roomNameInput')).sendKeys('protractorTest');
 			element.all(by.css('.blue-button')).first().click().then(function() {
-				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), TIMEOUT);
 			}).then(function() {
-				expect(browser.getCurrentUrl()).toEqual(hostUrl + '/chat-room/protractortest');
+				expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/chat-room/protractortest');
 			});
 		});
 
@@ -54,9 +57,9 @@ describe('quizitive app tests', function() {
 			}).then(function() {
 				return element.all(by.css('.blue-button')).first().click();
 			}).then(function() {
-				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), TIMEOUT);
 			}).then(function() {
-				expect(browser.getCurrentUrl()).toEqual(hostUrl + '/chat-room/' + room[room.length - 1].toLowerCase());
+				expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/chat-room/' + room[room.length - 1].toLowerCase());
 			});
 		});
 
@@ -67,9 +70,9 @@ describe('quizitive app tests', function() {
 			}).then(function() {
 				return element.all(by.css('.blue-button')).last().click();
 			}).then(function() {
-				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), 2500);
+				return browser.wait(protractor.until.elementLocated(by.id('submitButton')), TIMEOUT);
 			}).then(function() {
-				expect(browser.getCurrentUrl()).toEqual(hostUrl + '/chat-room/' + room[room.length - 1].toLowerCase());
+				expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/chat-room/' + room[room.length - 1].toLowerCase());
 			});
 		});
 
@@ -88,7 +91,7 @@ describe('quizitive app tests', function() {
 			];
 			var invalidArray = [
 				"!@#$%^&*()",
-				"Room Name",
+				"Room.Name",
 				"what?",
 				"UPPERlower_lowerUPPER^",
 				"500%",
@@ -110,13 +113,38 @@ describe('quizitive app tests', function() {
 		});
 	});
 
+	//Relies on the fact that the login from earlier is still in effect
 	describe('quizitive room page user experience', function() {
 		beforeEach(function() {
-			browser.get(hostUrl + '/#/chat-room/test');
+			browser.get(HOST_URL + '/#/chat-room/test');
 		});
 
 		it('should start in a valid room', function() {
-			expect(browser.getCurrentUrl()).toEqual(hostUrl + '/chat-room/test');
+			expect(browser.getCurrentUrl()).toEqual(HOST_URL + '/chat-room/test');
+		});
+
+		it('initial selected question should be the first one', function() {
+			element.all(by.id('questionDot')).then(function(dots) {
+				dots.forEach(function(element) {
+					element.getAttribute('class').then(function(classAttr) {
+						if(classAttr.indexOf('selected') > -1) {
+							expect(dots[0] == element);
+						}
+					});
+				});
+			});
+		});
+
+		it('should change questions when an unselected dot is pressed', function() {
+			element.all(by.id('questionDot')).then(function(dots) {
+				dots[1].click().then(dots.forEach(function(element) {
+					element.getAttribute('class').then(function(classAttr) {
+						if(classAttr.indexOf('selected') > -1) {
+							expect(dots[1] == element);
+						}
+					});
+				}));
+			});
 		});
 	});
 });

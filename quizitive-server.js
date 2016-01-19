@@ -1,3 +1,26 @@
+/* global require, __dirname, process, setTimeout */
+
+if(process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'production') {
+	throw 'Please specify NODE_ENV as development or production';
+}
+
+require('config-envy')({
+	env: process.env.NODE_ENV,
+	cwd: process.cwd(),
+	localEnv: '.env',
+	overrideProcess: false,
+	silent: false,
+});
+
+//GLOBAL ENV
+var TWILIO_ACCOUNTSID = process.env.TWILIO_ACCOUNTSID;
+var TWILIO_AUTHTOKEN = process.env.TWILIO_AUTHTOKEN;
+var TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || 7200; //sec
+var SOCKET_AUTH_TIMEOUT = process.env.SOCKET_AUTH_TIMEOUT || 500; //ms
+var PORT_NUMBER = process.env.PORT || 40569;
+var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'Quizitive';
+var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
+
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -6,22 +29,25 @@ var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
-var path = require('path');
-var passport = require('./js-modules/passport-init');
-var forceLogin = require('./js-modules/force-login');
-var twilio = require('./js-modules/twilio.js');
+var twilio = require('twilio')(TWILIO_ACCOUNTSID, TWILIO_AUTHTOKEN);
+
+var pp = require('passport');
+var Auth0Strategy = require('passport-auth0');
+var strategy = new Auth0Strategy({
+		domain: process.env.AUTH0_DOMAIN,
+		clientID: process.env.AUTH0_CLIENT_ID,
+		clientSecret: process.env.AUTH0_CLIENT_SECRET,
+		callbackURL: process.env.AUTH0_CALLBACK_URL
+}, function(accessToken, refreshToken, extraParams, profile, done) {
+		return done(null, profile);
+});
+var passport = pp.use(strategy);
 
 //GLOBALS
 //Keyfiles
-var LOCAL_PRIVATE_KEY = fs.readFileSync(__dirname + 'keyfiles/local-private-key.key');
-var LOCAL_PUBLIC_KEY = fs.readFileSync(__dirname + 'keyfiles/local-public-key.pem');
+var LOCAL_PRIVATE_KEY = fs.readFileSync(__dirname + '/keyfiles/local-private-key.key');
+var LOCAL_PUBLIC_KEY = fs.readFileSync(__dirname + '/keyfiles/local-public-key.pem');
 //var AUTH0_PUBLIC_KEY = fs.readFileSync('./keyfiles/wdd-public-key.pem');
-//Others
-var TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || 7200; //sec
-var SOCKET_AUTH_TIMEOUT = process.env.SOCKET_AUTH_TIMEOUT || 500; //ms
-var PORT_NUMBER = process.env.PORT || 40569;
-var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'Quizitive';
-var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
 
 var questionDB = [
 		{
@@ -153,7 +179,7 @@ app.post('/sms', urlEncodedParser, function(req, res) {
 	switch(req.body.Body) {
 		case 'A':
 		case 'a':
-			adminSocket.emit('textUpdate', { message: 'Correct answer from '})
+			adminSocket.emit('textUpdate', { message: 'Correct answer from '});
 			res.send('Correct!');
 			break;
 		default:

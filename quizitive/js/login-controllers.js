@@ -1,3 +1,5 @@
+/* global angular, window */
+
 var loginControllers = angular.module('quizitive');
 
 loginControllers.controller('loginController', function ($scope, store, $location, jwtHelper) {
@@ -7,7 +9,7 @@ loginControllers.controller('loginController', function ($scope, store, $locatio
 					//If a valid token is found, redirect to room selection page
 					$location.path('/room-sel');
 				} else {
-					window.location = 'http://' + window.location.hostname + '/auth0-login';
+					window.location = 'http://' + window.location.hostname + ':40569/auth0-login';
 				}
 		};
 });
