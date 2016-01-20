@@ -1,5 +1,5 @@
 /* global require, __dirname, process, setTimeout */
-//SIMPLE TEST OF GIT PULL ON SERVER
+
 if(process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'production') {
 	throw 'Please specify NODE_ENV as development or production';
 }
@@ -20,6 +20,7 @@ var SOCKET_AUTH_TIMEOUT = process.env.SOCKET_AUTH_TIMEOUT || 500; //ms
 var PORT_NUMBER = process.env.PORT || 40569;
 var TOKEN_ISSUED_BY = process.env.TOKEN_ISSUED_BY || 'Quizitive';
 var TOKEN_ALG = process.env.TOKEN_ALG || 'RS256';
+var COUCH_URL = process.env.DB_BASE_URL;
 
 var express = require('express');
 var app = express();
