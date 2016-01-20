@@ -1,5 +1,5 @@
 {
-	"projectName": "Quizitive",
+	"projectName": "quizitive",
 	"storage": "s3",
 	"defaults": {
 		"env": "{laneKey}",
