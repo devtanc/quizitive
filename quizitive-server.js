@@ -1,5 +1,5 @@
 /* global require, __dirname, process, setTimeout */
-
+//SIMPLE TEST OF GIT PULL ON SERVER
 if(process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'production') {
 	throw 'Please specify NODE_ENV as development or production';
 }
