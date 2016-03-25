@@ -1,6 +1,5 @@
 /* global angular, io */
-
-var app = angular.module('quizitive', ['angular-storage', 'angular-jwt', 'ngRoute', 'routeStyles', 'ngTouch'])
+var app = angular.module('quizitive', ['angular-jwt', 'ngRoute', 'routeStyles', 'ngTouch'])
 		.config(function ($routeProvider, $httpProvider, $locationProvider) {
 				$routeProvider.when('/', {
 						templateUrl: '/templates/quizitive-splash.temp.html',
@@ -41,4 +40,20 @@ app.factory('socket', function (store) {
 				token: store.get('auth-token')
 		});
 		return socket;
+});
+
+app.service('store', function($window) {
+	var localStorage = $window.localStorage;
+
+	this.get = function(key) {
+		return localStorage[key];
+	};
+
+	this.set = function(key, value) {
+		return localStorage.setItem(key, value);
+	};
+
+	this.remove = function(key) {
+		return localStorage.removeItem(key);
+	};
 });
