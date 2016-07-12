@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"description": "An app to allow greater communication in the classroom, and more precise evaluation of learning in real time.",
 	"scripts": {
+		"start": "node quizitive-server.js",
 		"test": "protractor",
 		"postinstall": "config-envy all get"
 	},

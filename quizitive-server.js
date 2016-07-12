@@ -1,11 +1,7 @@
 /* global require, __dirname, process, setTimeout */
 
-if(process.env.NODE_ENV != 'development' && process.env.NODE_ENV != 'production') {
-	throw 'Please specify NODE_ENV as development or production';
-}
-
 require('config-envy')({
-	env: process.env.NODE_ENV,
+	env: process.env.NODE_ENV || 'development',
 	cwd: process.cwd(),
 	localEnv: '.env',
 	overrideProcess: false,
